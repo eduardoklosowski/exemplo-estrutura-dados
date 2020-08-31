@@ -1,11 +1,14 @@
 package creche;
 
-public class ListaArray {
-    private int[] array;
+import java.util.Iterator;
+
+public class ListaArray<T> implements Lista<T> {
+    private T[] array;
     private int tamanho;
 
+    @SuppressWarnings("unchecked")
     public ListaArray() {
-        array = new int[2];
+        array = (T[]) new Object[2];
         tamanho = 0;
     }
 
@@ -13,16 +16,17 @@ public class ListaArray {
         return this.tamanho;
     }
 
-    public int pegar(int indice) {
+    public T pegar(int indice) {
         if (indice >= tamanho) {
             throw new ArrayIndexOutOfBoundsException();
         }
-        return array[indice];
+        return (T) array[indice];
     }
 
-    public void adicionar(int valor) {
+    @SuppressWarnings("unchecked")
+    public void adicionar(T valor) {
         if (tamanho == array.length) {
-            int[] novoArray = new int[array.length * 2];
+            T[] novoArray = (T[]) new Object[array.length * 2];
             for (int i = 0; i < array.length; i++) {
                 novoArray[i] = array[i];
             }
@@ -39,6 +43,20 @@ public class ListaArray {
         for (int i = indice; i < fim; i++) {
             array[i] = array[i + 1];
         }
-        array[--tamanho] = 0;
+        array[--tamanho] = null;
+    }
+
+    public Iterator<T> iterator() {
+        return new Iterator<T>(){
+            private int indice = 0;
+
+            public boolean hasNext() {
+                return indice < tamanho;
+            }
+
+            public T next() {
+                return pegar(indice++);
+            }
+        };
     }
 }
