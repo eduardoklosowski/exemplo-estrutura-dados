@@ -7,7 +7,7 @@ import java.util.Iterator;
  *
  * @param <T> Tipo dos objetos desta lista
  */
-public class ListaArray<T> implements Lista<T> {
+public class ListaArray<T> implements Lista<T>, Fila<T> {
     /** Array interno da implementação. */
     private T[] array;
     /** Quantidade de posições atualmente ocupadas do array. */
@@ -93,5 +93,15 @@ public class ListaArray<T> implements Lista<T> {
                 return pegar(indice++);
             }
         };
+    }
+
+    public void enfileirar(T valor) {
+        adicionar(valor);
+    }
+
+    public T desenfileirar() {
+        T valor = pegar(0);
+        remover(0);
+        return valor;
     }
 }

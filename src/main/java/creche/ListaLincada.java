@@ -29,7 +29,7 @@ class ListaLincadaItem<T> {
  *
  * @param <T> Tipo dos objetos desta lista
  */
-public class ListaLincada<T> implements Lista<T> {
+public class ListaLincada<T> implements Lista<T>, Fila<T> {
     /** Quantidade de elementos presentes na estrutura de dados. */
     private int tamanho = 0;
     /** Referência para a primeira posição da lista. */
@@ -131,5 +131,15 @@ public class ListaLincada<T> implements Lista<T> {
                 return valor;
             }
         };
+    }
+
+    public void enfileirar(T valor) {
+        adicionar(valor);
+    }
+
+    public T desenfileirar() {
+        T valor = pegar(0);
+        remover(0);
+        return valor;
     }
 }
