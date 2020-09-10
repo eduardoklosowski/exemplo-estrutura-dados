@@ -26,4 +26,17 @@ public class Ex04Fila {
             fila.desenfileirar();
         }
     }
+
+
+    @Test
+    public void testeFilaComFilaArray() {
+        Fila<Integer> fila = new FilaArray<Integer>();
+
+        for (int i = 0; i < 100000; i++) {
+            fila.enfileirar(i);
+        }
+        for (int i = 0; i < 100000; i++) {
+            fila.desenfileirar();
+        }
+    }
 }
